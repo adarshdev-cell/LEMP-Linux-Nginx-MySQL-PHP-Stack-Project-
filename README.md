@@ -1,7 +1,7 @@
 # LEMP Stack Project - Azure VM Deployment
 
 ## Project Overview
-This project sets up a LEMP (Linux, Nginx, MySQL, PHP) stack on an Azure Virtual Machine (VM) to host a PHP-based application that interacts with a MySQL database. The project also includes security enhancements, SSL/TLS configuration, and performance optimizations.
+This project sets up a LEMP (Linux, Nginx, MySQL, PHP) stack on an Azure Virtual Machine (VM) to host a PHP-based application that interacts with a MySQL database. 
 
 ## Prerequisites
 - An active [Azure](https://portal.azure.com/) account
