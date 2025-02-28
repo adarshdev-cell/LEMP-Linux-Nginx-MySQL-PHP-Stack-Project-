@@ -206,9 +206,9 @@ sudo rm /var/www/your_domain/info.php
 ### 10.  Testing Database Connection from PHP
 First, connect to the MySQL console using the root account:
 ```bash
-sudo musql
+sudo mysql
 ```
-creates a new user named newuser, using mysql_native_password as the default authentication method. We’re defining this user’s password as Strong1234!, but you should replace this value with a secure password of your own choosing.
+Creates a new user named newuser, using mysql_native_password as the default authentication method. We’re defining this user’s password as Strong1234!, but you should replace this value with a secure password of your own choosing.
 ```bash
  CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'Strong1234!';
 ```
