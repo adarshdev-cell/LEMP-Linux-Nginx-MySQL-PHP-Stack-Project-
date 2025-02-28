@@ -38,6 +38,52 @@ ssh  wpuser@52.172.186.224
 ```
  ![Azure VM Setup](images/updateapt.png)
 
+### 4. Install Nginx on Ubuntu
+```bash
+sudo apt isntall nginx
+```
+When prompted, press Y and ENTER to confirm that you want to install Nginx. Once the installation is finished, the Nginx web server will be active and running on your Ubuntu server.
+ ![Azure VM Setup](images/installnginx.png)
+
+### 5. ufw file enabled
+If you have the ufw firewall enabled, as recommended in our initial server setup guide, you will need to allow connections to Nginx. Nginx registers a few different UFW application profiles upon installation. To check which UFW profiles are available, run:
+```bash
+sudo ufw app list
+```
+![Azure VM Setup](images/ufwallow.png)
+
+Write the address that you receive in your web browser and it will take you to Nginx’s default landing page:
+```bash
+http://server_domain_or_IP
+```
+![Azure VM Setup](images/localonweb.png)
+
+If you receive this page, you have successfully installed Nginx and enabled HTTP traffic for your web server.
+
+### 6. Install MySQL
+
+Now that you have a web server up and running, you need to install the database system to store and manage data for your site. MySQL is a popular database management system used within PHP environments.
+
+```bash
+sudo apt install mysql-server
+```
+![Azure VM Setup](images/installmysql.png)
+
+When the installation is finished, it’s recommended that you run a security script that comes pre-installed with MySQL.
+
+```bash
+sudo mysql_secure_installation
+```
+If you answer “yes”, you’ll be asked to select a level of password validation.
+![Azure VM Setup](images/mysqlyes1.png)
+
+When you’re finished, test if you’re able to log in to the MySQL console:
+```bash
+sudo mysql
+```
+![Azure VM Setup](images/undermysql.png)
+
+
 ### 2. Install LEMP Stack
 Connect to the VM via SSH and run the following commands:
 
