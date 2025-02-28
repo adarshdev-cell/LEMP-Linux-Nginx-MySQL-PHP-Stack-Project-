@@ -105,6 +105,7 @@ Then, open a new configuration file in Nginx’s sites-available directory using
 ```bash
 sudo nano /etc/nginx/sites-available/your_domain
 ```
+Add nginx server file given in below
 ```bash
 server {
     listen 80;
@@ -124,3 +125,81 @@ server {
     }
 }
 ```
+Activate your configuration by linking to the configuration file from Nginx’s sites-enabled directory:
+```bash
+sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+```
+Then, unlink the default configuration file from the /sites-enabled/ directory:
+```bash
+sudo unlink /etc/nginx/sites-enabled/default
+
+```
+This will tell Nginx to use the configuration next time it is reloaded. You can test your configuration for syntax errors by running the following:
+```bash
+sudo nginx -t
+```
+
+When you are ready, reload Nginx to apply the changes:
+
+```bash
+sudo systemctl reload nginx
+```
+
+Your new website is now active, but the web root /var/www/your_domain is still empty. Create an index.html file in that location so that you can test that your new server block works as expected:
+
+```bash
+nano /var/www/your_domain/index.html
+```
+Include the following content in this file:
+
+```bash
+<html>
+<head>
+    <title>your_domain website</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>This is the landing page of <strong>your_domain</strong>.</p>
+</body>
+</html>
+```
+Now go to your browser and access your server’s domain name or IP address, as listed within the server_name directive in your server block configuration file:
+
+```bash
+http://server_domain_or_IP
+```
+
+You’ll receive a page like the following:
+
+![Azure VM Setup](images/undermysql.png)
+
+
+### 9. Testing PHP with Nginx
+
+You can do this by creating a test PHP file in your document root. Open a new file called info.php within your document root in your preferred text editor:
+
+```bash
+nano /var/www/your_domain/info.php
+```
+Add the following lines into the new file. This is valid PHP code that will return information about your server:
+
+```bash
+<?php
+phpinfo();
+?>
+```
+You can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php:
+
+```bash
+http://server_domain_or_IP/info.php
+```
+
+You will receive a web page containing detailed information about your server:
+![Azure VM Setup](images/phponweb.png)
+
+After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. You can use rm to remove that file:
+```bash
+sudo rm /var/www/your_domain/info.php
+```
+### 10.  Testing Database Connection from PHP
+We’ll create a database named  and a user named example_user, but you can replace these names with different values.
