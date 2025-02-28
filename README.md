@@ -171,7 +171,9 @@ http://server_domain_or_IP
 
 You’ll receive a page like the following:
 
-![Azure VM Setup](images/undermysql.png)
+
+
+![Azure VM Setup](images/index.htmlonweb.png)
 
 
 ### 9. Testing PHP with Nginx
