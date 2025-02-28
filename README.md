@@ -17,7 +17,7 @@ This project sets up a LEMP (Linux, Nginx, MySQL, PHP) stack on an Azure Virtual
    - OS: Ubuntu 22.04 LTS
    - Size: Standard B1s (or higher based on expected traffic)
    - Authentication: SSH Public Key or Password
-   ![Azure VM Setup](images/azure-vm-setup.png)
+   ![Azure VM Setup](images/Screenshot 2025-02-27 235152.png)
 3. Allow inbound ports for HTTP (80), HTTPS (443), and SSH (22).
 
 ### 2. Install LEMP Stack
