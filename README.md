@@ -31,8 +31,12 @@ ssh  wpuser@52.172.186.224
 ```
  ![Azure VM Setup](images/loginwithssh.png)
 
+### 3. Updating Packages on Azure Ubuntu VM using APT
 
-
+```bash
+ sudo apt update
+```
+ ![Azure VM Setup](images/updateapt.png)
 
 ### 2. Install LEMP Stack
 Connect to the VM via SSH and run the following commands:
