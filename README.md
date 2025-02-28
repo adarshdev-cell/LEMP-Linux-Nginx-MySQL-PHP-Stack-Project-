@@ -266,7 +266,7 @@ INSERT INTO todo_list (content) VALUES
 ('Fix the Nginx configuration'),
 ('Review WordPress security settings'),
 ('Optimize MySQL database'),
-('Backup server files');
+('Backup server files'); 
 ```
 Retrieves and displays all columns and rows from the todo_list table.
  ```bash
