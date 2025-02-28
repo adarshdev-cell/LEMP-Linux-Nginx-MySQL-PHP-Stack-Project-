@@ -202,4 +202,131 @@ After checking the relevant information about your PHP server through that page,
 sudo rm /var/www/your_domain/info.php
 ```
 ### 10.  Testing Database Connection from PHP
-We’ll create a database named  and a user named example_user, but you can replace these names with different values.
+First, connect to the MySQL console using the root account:
+```bash
+sudo musql
+```
+creates a new user named newuser, using mysql_native_password as the default authentication method. We’re defining this user’s password as Strong1234!, but you should replace this value with a secure password of your own choosing.
+```bash
+ CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'Strong1234!';
+```
+Granting Full Privileges to a MySQL User with Grant Option
+
+```bash
+GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost' WITH GRANT OPTION;
+```
+Reloading MySQL Privileges with FLUSH PRIVILEGES
+
+```bash
+FLUSH PRIVILEGES;
+```
+Viewing MySQL Users and Their Host Permissions 
+```bash
+SELECT user, host FROM mysql.user;
+```
+exit from MySQL
+```bash
+exit
+```
+You can test if the new user has the proper permissions by logging in to the MySQL console again, using the custom user credentials. Notice the -p flag in this command, which will prompt you for the password used when creating the 'newuser' user, and here, the password is 'Strong1234!' :   
+
+```bash
+mysql -u newuser -p
+```
+To create a new database, run the following command from your MySQL console:
+
+```bash
+CREATE DATABASE todo_db;
+```
+Use the database that you created. Here I create todo_db:
+
+```bash
+USE todo_db;
+```
+Next, we’ll create a test table named todo_list. From the MySQL console, run the following statement:
+```bash
+CREATE TABLE todo_list (
+	item_id INT AUTO_INCREMENT,
+	content VARCHAR(255),
+	PRIMARY KEY(item_id)
+);
+
+```
+Run command SHOW TABLE in MySQL :
+```bash
+SHOW TABLES;
+```
+Insert data into table todo_list:
+```bash
+INSERT INTO todo_list (content) VALUES
+('Buy groceries'),
+('Complete the project report'),
+('Schedule team meeting'),
+('Update website content'),
+('Fix the Nginx configuration'),
+('Review WordPress security settings'),
+('Optimize MySQL database'),
+('Backup server files');
+```
+Retrieves and displays all columns and rows from the todo_list table.
+ ```bash
+SELECT * FROM todo_list;
+```
+![Azure VM Setup](images/selectfromtodo_list.png)
+
+And now exit from MySQL
+```bash
+exit
+```
+Create the File todo_list.php in /var/www/your_domain_directory/ sudo nano todo_list.php
+```bash
+sudo nano todo_list.php
+```
+Insert php file in todo_list.php with your user_name and password which you created in mysql 
+```bash
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$user = "newuser";
+$password = "Strong1234!";
+$database = "todo_db";
+$table = "todo_list";
+
+try {
+    $db = new PDO("mysql:host=localhost;dbname=$database;charset=utf8mb4", $user, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false, 
+    ]);
+
+    $stmt = $db->prepare("SELECT content FROM $table");
+    $stmt->execute();
+
+    echo "<h2>TODO</h2><ol>";
+    while ($row = $stmt->fetch()) {
+        echo "<li>" . htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8') . "</li>";
+    }
+    echo "</ol>";
+
+} catch (PDOException $e) {
+    error_log("Database error: " . $e->getMessage()); // Log the error
+    die("An error occurred. Please try again later."); // Display a user-friendly message
+}
+?>
+```
+Save and close the file when you’re done editing.
+
+
+You can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php: 
+
+ ```bash
+http://server_domain_or_IP/todo_list.php
+```
+
+![Azure VM Setup](images/todo_listonweb.png)
+
+
+
+
+
