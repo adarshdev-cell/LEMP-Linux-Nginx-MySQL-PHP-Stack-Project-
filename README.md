@@ -9,7 +9,7 @@ This project sets up a LEMP (Linux, Nginx, MySQL, PHP) stack on an Azure Virtual
 - SSH access to the Azure VM
 - Basic knowledge of Linux and MySQL
 
-## Setup Instructions
+## Setup Instructions 
 
 ### 1. Create an Azure Virtual Machine
 1. Log in to [Azure Portal](https://portal.azure.com/).
